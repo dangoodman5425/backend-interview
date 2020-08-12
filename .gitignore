@@ -233,4 +233,4 @@ gradle-app.setting
 
 # End of https://www.gitignore.io/api/vim,macos,emacs,gradle,windows,intellij+all
 
-!.idea/
+.idea

@@ -9,25 +9,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class EmployeeProcessor
-{
-    public static Path getPathForResource(final String path)
-    {
-        try
-        {
+public class EmployeeProcessor {
+    public static Path getPathForResource(final String path) {
+        try {
             return Paths.get(ClassLoader.getSystemResource(path).toURI());
         }
-        catch (URISyntaxException e)
-        {
+        catch (final URISyntaxException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         final Map<Employee, Integer> duplicateCount = new HashMap<>();
 
-        try (Stream<String> stream = Files.lines(getPathForResource("employees.csv")))
+        try (final Stream<String> stream = Files.lines(getPathForResource("employees.csv")))
         {
             stream.forEach(line -> {
                 final String[] elements = line.split(",");
@@ -35,13 +30,11 @@ public class EmployeeProcessor
                 duplicateCount.put(emp, duplicateCount.getOrDefault(emp, 0) + 1);
             });
         }
-        catch (IOException ex)
-        {
+        catch (final IOException ex) {
             throw new RuntimeException(ex);
         }
 
-        for (Map.Entry<Employee, Integer> entry : duplicateCount.entrySet())
-        {
+        for (final Map.Entry<Employee, Integer> entry : duplicateCount.entrySet()) {
             final Employee emp = entry.getKey();
             System.out.println(emp.firstName + " " + emp.middleInitial + " " + emp.lastName + ": " + entry.getValue());
         }
